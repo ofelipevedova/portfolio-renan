@@ -2,10 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { Reveal } from "@/components/Reveal";
 import { CaseEmailCta } from "@/components/case-pages/CaseEmailCta";
+import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
-import type { DetailedCasePageData } from "@/data/case-pages/types";
+import type {
+  CaseResultHighlight,
+  DetailedCasePageData,
+} from "@/data/case-pages/types";
 import { publicPath } from "@/lib/site-path";
 
 function SectionLabel({ children }: { children: ReactNode }) {
@@ -22,6 +25,36 @@ function TextStack({ children }: { children: ReactNode }) {
     <div className="max-w-[930px] space-y-4 text-[15px] leading-[1.72] tracking-[-0.01em] text-ink/70 md:text-[16px]">
       {children}
     </div>
+  );
+}
+
+function ResultsHighlights({
+  highlights,
+}: {
+  highlights: CaseResultHighlight[];
+}) {
+  return (
+    <Reveal className="mt-10">
+      <section className="space-y-4">
+        <SectionLabel>Resultados alcançados</SectionLabel>
+
+        <div className="grid gap-4 md:[grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]">
+          {highlights.map((highlight) => (
+            <div
+              key={highlight.label}
+              className="rounded-[1.5rem] border border-black/10 bg-ink p-5 text-white md:p-6"
+            >
+              <p className="font-display text-[clamp(2.4rem,5vw,4rem)] leading-none tracking-[-0.08em] text-white">
+                {highlight.value}
+              </p>
+              <p className="mt-3 max-w-[18rem] text-sm leading-6 text-white/70 md:text-[15px]">
+                {highlight.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </Reveal>
   );
 }
 
@@ -73,6 +106,9 @@ function Breadcrumb({ breadcrumb }: { breadcrumb: string }) {
 export function DetailedCasePage({ page }: { page: DetailedCasePageData }) {
   const [titleLineOne, titleLineTwo] = splitTitleIntoTwoLines(page.title);
   const problemLabel = page.problemLabel ?? "Qual era o meu desafio";
+  const afterProblemLayout = page.layout?.afterProblem ?? "grid";
+  const implementationImagePlacement = page.layout?.implementationImage ?? "standalone";
+  const [implementationIntro, ...implementationTail] = page.sections.implementation;
 
   return (
     <>
@@ -114,6 +150,10 @@ export function DetailedCasePage({ page }: { page: DetailedCasePageData }) {
               </div>
             ))}
           </dl>
+
+          {page.resultsHighlights?.length ? (
+            <ResultsHighlights highlights={page.resultsHighlights} />
+          ) : null}
 
           <section className="mt-12 space-y-4">
             <SectionLabel>O cenário</SectionLabel>
@@ -165,22 +205,61 @@ export function DetailedCasePage({ page }: { page: DetailedCasePageData }) {
           </section>
 
           <section className="mt-[120px] space-y-6">
-            <Reveal>
-              <div className="grid gap-6 md:grid-cols-2">
-                {page.images.pairTwo.map((image) => (
+            {afterProblemLayout === "single" ? (
+              <Reveal>
+                {page.images.pairTwo[0] ? (
                   <Image
-                    key={image.src}
-                    src={publicPath(image.src)}
-                    alt={image.alt}
-                    width={image.width}
-                    height={image.height}
+                    src={publicPath(page.images.pairTwo[0].src)}
+                    alt={page.images.pairTwo[0].alt}
+                    width={page.images.pairTwo[0].width}
+                    height={page.images.pairTwo[0].height}
                     quality={90}
                     className="block h-auto w-full"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 1120px) 100vw, 1120px"
                   />
-                ))}
-              </div>
-            </Reveal>
+                ) : null}
+              </Reveal>
+            ) : afterProblemLayout === "featured" ? (
+              <Reveal>
+                <div className="grid gap-4 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
+                  {page.images.pairTwo.map((image, index) => (
+                    <div
+                      key={image.src}
+                      className={`overflow-hidden border border-black/10 bg-[#f6f7fb] p-3 md:p-4 ${
+                        index === 1 ? "lg:mt-14" : ""
+                      }`}
+                    >
+                      <Image
+                        src={publicPath(image.src)}
+                        alt={image.alt}
+                        width={image.width}
+                        height={image.height}
+                        quality={90}
+                        className="block h-auto w-full"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            ) : (
+              <Reveal>
+                <div className="grid gap-6 md:grid-cols-2">
+                  {page.images.pairTwo.map((image) => (
+                    <Image
+                      key={image.src}
+                      src={publicPath(image.src)}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                      quality={90}
+                      className="block h-auto w-full"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  ))}
+                </div>
+              </Reveal>
+            )}
           </section>
 
           <section className="mt-[120px] space-y-4">
@@ -192,45 +271,90 @@ export function DetailedCasePage({ page }: { page: DetailedCasePageData }) {
             </TextStack>
           </section>
 
-          <section className="mt-[120px]">
-            <Reveal>
-              <Image
-                src={publicPath(page.images.implementation.src)}
-                alt={page.images.implementation.alt}
-                width={page.images.implementation.width}
-                height={page.images.implementation.height}
-                quality={90}
-                className="block h-auto w-full"
-                sizes="(max-width: 1120px) 100vw, 1120px"
-              />
-            </Reveal>
-          </section>
+          {afterProblemLayout === "single" && page.images.pairTwo[1] ? (
+            <section className="mt-[120px]">
+              <Reveal>
+                <Image
+                  src={publicPath(page.images.pairTwo[1].src)}
+                  alt={page.images.pairTwo[1].alt}
+                  width={page.images.pairTwo[1].width}
+                  height={page.images.pairTwo[1].height}
+                  quality={90}
+                  className="block h-auto w-full"
+                  sizes="(max-width: 1120px) 100vw, 1120px"
+                />
+              </Reveal>
+            </section>
+          ) : null}
+
+          {implementationImagePlacement === "standalone" ? (
+            <section className="mt-[120px]">
+              <Reveal>
+                <Image
+                  src={publicPath(page.images.implementation.src)}
+                  alt={page.images.implementation.alt}
+                  width={page.images.implementation.width}
+                  height={page.images.implementation.height}
+                  quality={90}
+                  className="block h-auto w-full"
+                  sizes="(max-width: 1120px) 100vw, 1120px"
+                />
+              </Reveal>
+            </section>
+          ) : null}
 
           <section className="mt-[120px] space-y-4">
             <SectionLabel>Como implementamos a solução</SectionLabel>
-            <TextStack>
-              {page.sections.implementation.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </TextStack>
+            {implementationImagePlacement === "inline" ? (
+              <div className="max-w-[930px] space-y-4 text-[15px] leading-[1.72] tracking-[-0.01em] text-ink/70 md:text-[16px]">
+                {implementationIntro ? <p>{implementationIntro}</p> : null}
+                {implementationTail.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            ) : (
+              <TextStack>
+                {page.sections.implementation.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </TextStack>
+            )}
           </section>
 
-          <section className="mt-[120px]">
-            <Reveal>
-              <Image
-                src={publicPath(page.images.results.src)}
-                alt={page.images.results.alt}
-                width={page.images.results.width}
-                height={page.images.results.height}
-                quality={90}
-                className="block h-auto w-full"
-                sizes="(max-width: 1120px) 100vw, 1120px"
-              />
-            </Reveal>
-          </section>
+          {implementationImagePlacement === "inline" ? (
+            <section className="mt-8">
+              <Reveal>
+                <Image
+                  src={publicPath(page.images.implementation.src)}
+                  alt={page.images.implementation.alt}
+                  width={page.images.implementation.width}
+                  height={page.images.implementation.height}
+                  quality={90}
+                  className="block h-auto w-full"
+                  sizes="(max-width: 1120px) 100vw, 1120px"
+                />
+              </Reveal>
+            </section>
+          ) : null}
+
+          {page.images.results ? (
+            <section className="mt-[120px]">
+              <Reveal>
+                <Image
+                  src={publicPath(page.images.results.src)}
+                  alt={page.images.results.alt}
+                  width={page.images.results.width}
+                  height={page.images.results.height}
+                  quality={90}
+                  className="block h-auto w-full"
+                  sizes="(max-width: 1120px) 100vw, 1120px"
+                />
+              </Reveal>
+            </section>
+          ) : null}
 
           <section className="mt-[120px] space-y-4">
-            <SectionLabel>E esses foram os resultados</SectionLabel>
+            <SectionLabel>Aprendizados</SectionLabel>
             <TextStack>
               {page.sections.results.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>

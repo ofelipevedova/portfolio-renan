@@ -53,7 +53,11 @@ const heroCarouselItems: HeroCarouselItem[] = [
 const breadcrumbItems = [
   {
     label: "Inicio",
-    href: "/",
+    href: "/#inicio",
+  },
+  {
+    label: "Cases",
+    href: "/#cases",
   },
   {
     label: "Background",
@@ -158,13 +162,6 @@ const posts: PostItem[] = [
   },
   {
     title:
-      "Aperfeiçoando a experiência do usuário: Como minha abordagem como UX Designer reduziu os cancelamentos após a primeira consulta na Dr.Acesso",
-    description:
-      "Um case sobre pesquisa, hipóteses, testes e ajustes de experiência para reduzir cancelamentos e melhorar a continuidade das consultas em um serviço de saúde online.",
-    href: "https://medium.com/@felipevedova/aperfei%C3%A7oando-a-experi%C3%AAncia-do-usu%C3%A1rio-como-minha-abordagem-como-ux-designer-reduziu-os-cf5af68996a6",
-  },
-  {
-    title:
       "O uso de tags contextuais por geolocalização em lojas virtuais: Melhorando a experiência do cliente",
     description:
       "Uma reflexão sobre personalização em lojas virtuais a partir da localização física do cliente e sobre como tags contextuais ajudam na relevância da experiência de compra.",
@@ -192,23 +189,14 @@ function BreadcrumbTrail({
           </>
         );
 
-        if (isActive) {
-          return (
-            <span
-              key={item.label}
-              aria-current="page"
-              className="inline-flex items-center gap-3 font-medium text-accent"
-            >
-              {content}
-            </span>
-          );
-        }
-
         return (
           <Link
             key={item.label}
             href={item.href}
-            className="inline-flex items-center gap-3 text-ink/70 transition hover:text-ink"
+            aria-current={isActive ? "page" : undefined}
+            className={`inline-flex items-center gap-3 transition ${
+              isActive ? "font-medium text-accent" : "text-ink/70 hover:text-ink"
+            }`}
           >
             {content}
           </Link>
@@ -311,7 +299,7 @@ export default function HomePage() {
   return (
     <>
       <main className="space-y-16 pb-16 pt-8 md:space-y-24">
-        <section className="page-shell">
+        <section id="inicio" className="page-shell">
           <div className="space-y-4">
             <HeroCarousel items={heroCarouselItems} />
 
@@ -372,7 +360,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="cases" className="page-shell">
+        <section className="page-shell">
           <HomeCaseMosaic items={casesByDisplayOrder} />
         </section>
 

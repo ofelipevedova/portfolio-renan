@@ -5,6 +5,11 @@ export type CaseImageAsset = {
   height: number;
 };
 
+export type CaseResultHighlight = {
+  value: string;
+  label: string;
+};
+
 export type CasePageFooter = {
   email: string;
   address: string;
@@ -12,6 +17,11 @@ export type CasePageFooter = {
     label: string;
     href: string;
   }[];
+};
+
+export type DetailedCasePageLayout = {
+  afterProblem?: "grid" | "featured" | "single";
+  implementationImage?: "standalone" | "inline";
 };
 
 export type DetailedCasePageData = {
@@ -32,13 +42,15 @@ export type DetailedCasePageData = {
     implementation: string[];
     results: string[];
   };
+  resultsHighlights?: CaseResultHighlight[];
+  layout?: DetailedCasePageLayout;
   images: {
     hero: CaseImageAsset;
     scenario: CaseImageAsset;
     pairOne: CaseImageAsset[];
     pairTwo: CaseImageAsset[];
     implementation: CaseImageAsset;
-    results: CaseImageAsset;
+    results?: CaseImageAsset;
   };
   cta: {
     label: string;

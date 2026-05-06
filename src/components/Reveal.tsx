@@ -44,7 +44,7 @@ export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
       ref={ref}
       data-reveal
       data-visible={visible ? "true" : "false"}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ animationDelay: `${delay}ms` }}
       className={className}
     >
       {children}

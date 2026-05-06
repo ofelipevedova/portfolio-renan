@@ -18,6 +18,11 @@ export const portalAnaliseDocumentosCasePage = {
     { label: "Período", value: "Agosto - Outubro" },
     { label: "Ano", value: "2024" },
   ],
+  resultsHighlights: [
+    { value: "73%", label: "menos tempo de SLA" },
+    { value: "87%", label: "menos custo por análise" },
+    { value: "6 -> 2", label: "analistas no processo" },
+  ],
   sections: {
     scenario: [
       "Em 2024, liderei o design de uma ferramenta de backoffice de crédito. O objetivo era integrar inteligência artificial ao processo de verificação manual realizado por analistas de crédito, uma tarefa sensível e de alta responsabilidade.",

@@ -30,7 +30,8 @@ export const pegaAReceitaCasePage = {
       "A solução foi construída a partir da reorganização da arquitetura da experiência, priorizando descoberta, leitura e execução das receitas. O trabalho focou em evoluir fluxos principais, melhorar escaneabilidade de conteúdo, reforçar consistência visual e criar uma experiência responsiva preparada para diferentes contextos de uso.",
     ],
     results: [
-      "O projeto resultou em uma experiência pensada para maximizar descoberta, engajamento e facilidade de uso desde o lançamento do produto. A solução estabeleceu uma base escalável para a plataforma, com projeção de aumento de 38% na exploração de receitas por navegação e busca, 27% maior intenção de recorrência, além de uma experiência otimizada para mobile, principal contexto de uso do produto. Além dos indicadores de engajamento esperados, o projeto definiu uma estrutura sólida para crescimento do produto, contemplando evolução de conteúdo, retenção e futuras oportunidades de monetização.",
+      "O projeto reforçou uma experiência mais clara para descobrir receitas e navegar entre conteúdos sem fricção.",
+      "A principal aprendizagem foi que uma estrutura mais simples e responsiva ajuda a sustentar crescimento sem perder usabilidade no dia a dia.",
     ],
   },
   images: {

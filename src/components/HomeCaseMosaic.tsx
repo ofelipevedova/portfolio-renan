@@ -15,9 +15,11 @@ type HomeCaseMosaicProps = {
 function CaseMosaicCard({
   item,
   delay,
+  id,
 }: {
   item: PortfolioCase;
   delay: number;
+  id?: string;
 }) {
   const displayTitle =
     item.slug === "website-builder-macle" ? "Construtor de sites Macle" : item.title;
@@ -56,6 +58,7 @@ function CaseMosaicCard({
   return (
     <Reveal className="h-full" delay={delay}>
       <Link
+        id={id}
         href={`/cases/${item.slug}`}
         className="group flex h-full flex-col overflow-hidden bg-transparent text-ink md:h-[500px] md:cursor-none"
         aria-label={`Abrir case ${displayTitle}`}
@@ -126,28 +129,39 @@ function CaseMosaicCard({
 }
 
 export function HomeCaseMosaic({ items }: HomeCaseMosaicProps) {
-  const rows = [
-    {
-      items: items.slice(0, 2),
-    },
-    {
-      items: items.slice(2, 4),
-    },
-  ] as const;
+  const rows = items.reduce<PortfolioCase[][]>((acc, item, index) => {
+    const rowIndex = Math.floor(index / 2);
+
+    if (!acc[rowIndex]) {
+      acc[rowIndex] = [];
+    }
+
+    acc[rowIndex].push(item);
+    return acc;
+  }, []);
 
   return (
     <div className="space-y-4 md:space-y-6">
-      {rows.map((row, rowIndex) => (
-        <div key={`row-${rowIndex}`} className="grid gap-4 md:h-[500px] md:grid-cols-2">
-          {row.items.map((item, itemIndex) => (
-            <CaseMosaicCard
-              key={item.slug}
-              item={item}
-              delay={(rowIndex * 2 + itemIndex) * 90}
-            />
-          ))}
-        </div>
-      ))}
+      {rows.map((row, rowIndex) => {
+        return (
+          <div
+            key={`row-${rowIndex}`}
+            className="grid gap-4 md:h-[500px] md:grid-cols-2"
+          >
+            {row.map((item, itemIndex) => (
+              <CaseMosaicCard
+                key={item.slug}
+                item={item}
+                delay={(rowIndex * 2 + itemIndex) * 90}
+                id={rowIndex === 0 && itemIndex === 0 ? "cases" : undefined}
+              />
+            ))}
+            {row.length === 1 ? (
+              <div aria-hidden="true" className="hidden md:block md:invisible" />
+            ) : null}
+          </div>
+        );
+      })}
     </div>
   );
 }

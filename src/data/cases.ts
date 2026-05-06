@@ -327,13 +327,85 @@ export const cases: PortfolioCase[] = [
       },
     ],
   },
+  {
+    slug: "portal-validador-de-documentos",
+    title: "Portal validador de documentos",
+    category: "Produto",
+    year: "2024",
+    summary:
+      "Portal para validar documentos e evidências com busca por hash ou QR code.",
+    overview:
+      "A experiência reorganiza a leitura de histórico, signatário e auditorias para reduzir fricção na validação jurídica.",
+    cover: {
+      src: media.cases.covers.portalValidador,
+      alt: "Capa do portal validador de documentos BemSign",
+      objectPosition: "center center",
+    },
+    metrics: [
+      { value: "Hash", label: "busca direta do documento" },
+      { value: "QR Code", label: "leitura alternativa rápida" },
+      { value: "Mobile", label: "uso em campo e apoio à rotina" },
+    ],
+    sections: [
+      {
+        title: "Leitura estratégica",
+        text:
+          "O portal foi pensado para apoiar peritos jurídicos em uma rotina sensível, em que cada dado precisa estar à mão e com leitura rápida.",
+      },
+      {
+        title: "Menos fricção",
+        text:
+          "A reorganização da interface ajudou a concentrar histórico, documentos, signatário e auditorias em uma mesma lógica visual.",
+      },
+      {
+        title: "Validação mais clara",
+        text:
+          "A solução foi desenhada para dar mais segurança ao processo e permitir consultas por código, hash ou QR code sem dispersar o usuário.",
+      },
+    ],
+    gallery: [
+      {
+        src: media.cases.detail.portalValidador.hero,
+        alt: "Portal validador de documentos em destaque.",
+        caption: "Visão principal da experiência.",
+      },
+      {
+        src: media.cases.detail.portalValidador.scenario,
+        alt: "Listagem de validações no portal BemSign.",
+        caption: "Leitura da lista e do histórico.",
+      },
+      {
+        src: media.cases.detail.portalValidador.implementation,
+        alt: "Busca por código e leitura por QR code no portal.",
+        caption: "Acesso direto ao documento.",
+      },
+    ],
+    logos: [
+      {
+        src: media.brands.acehub,
+        alt: "Logo azul minimalista",
+        label: "Marca azul",
+      },
+      {
+        src: media.brands.vulpistudio,
+        alt: "Logo geométrico escuro",
+        label: "Marca escura",
+      },
+      {
+        src: media.brands.dbcCompany,
+        alt: "Logo BC",
+        label: "BC",
+      },
+    ],
+  },
 ];
 
 const caseDisplayOrder = [
   "macle-sistema-erp",
   "website-builder-macle",
-  "pega-a-receita",
+  "portal-validador-de-documentos",
   "portal-analise-de-documentos-por-ai",
+  "pega-a-receita",
 ] as const;
 
 const caseDisplayPriority = new Map<string, number>(

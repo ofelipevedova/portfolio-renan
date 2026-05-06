@@ -16,6 +16,7 @@ export const media = {
       macleErp: "/assets/cases/covers/macle-erp.png",
       bemsignAnaliseDocumentos:
         "/assets/cases/covers/bemsign-analise-documentos-por-ia.png",
+      portalValidador: "/assets/cases/portal-validador/01.png",
     },
     shared: {
       macleBuilderShowcase: "/assets/cases/shared/macle-builder-showcase.jpg",
@@ -64,6 +65,15 @@ export const media = {
         pairTwoRight: "/assets/cases/portal-analise-de-documentos-por-ai/case-form-02.png",
         implementation: "/assets/cases/portal-analise-de-documentos-por-ai/case-laptop-02.png",
         results: "/assets/cases/portal-analise-de-documentos-por-ai/case-laptop-final.png",
+      },
+      portalValidador: {
+        hero: "/assets/cases/portal-validador/01.png",
+        scenario: "/assets/cases/portal-validador/02.png",
+        pairOneLeft: "/assets/cases/portal-validador/03.png",
+        pairOneRight: "/assets/cases/portal-validador/04.png",
+        pairTwoLeft: "/assets/cases/portal-validador/05.png",
+        pairTwoRight: "/assets/cases/portal-validador/06.png",
+        implementation: "/assets/cases/portal-validador/07.png",
       },
     },
   },

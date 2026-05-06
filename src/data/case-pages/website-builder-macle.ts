@@ -17,6 +17,10 @@ export const websiteBuilderMacleCasePage = {
     { label: "Tipo", value: "Construtor de sites" },
     { label: "Role", value: "UX/UI Design" },
   ],
+  resultsHighlights: [
+    { value: "32%", label: "menos chamados ao suporte técnico" },
+    { value: "41%", label: "mais sites publicados na plataforma" },
+  ],
   sections: {
     scenario: [
       "A Macle possuía um ERP voltado para gestão empresarial e, dentro do ecossistema da plataforma, oferecia um construtor de sites como funcionalidade exclusiva para assinantes. A proposta da ferramenta era permitir que clientes criassem e gerenciassem seus próprios sites de forma simples, integrando presença digital e operação em um único ambiente. Mais do que um recurso complementar, o builder funcionava como parte da estratégia de valor do produto.",

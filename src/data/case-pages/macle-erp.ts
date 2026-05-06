@@ -17,6 +17,11 @@ export const macleErpCasePage = {
     { label: "Tipo", value: "ERP para lojas de calçados" },
     { label: "Role", value: "UX/UI Design" },
   ],
+  resultsHighlights: [
+    { value: "35%", label: "menos tempo nas tarefas críticas" },
+    { value: "29%", label: "menos suporte operacional" },
+    { value: "31%", label: "mais produtividade percebida" },
+  ],
   sections: {
     scenario: [
       "O ERP da Macle era utilizado principalmente por lojas de calçados para gestão de operações como vendas, estoque, pedidos e controle financeiro. Por se tratar de um sistema presente no dia a dia do negócio, a eficiência da experiência impactava diretamente a produtividade das equipes e a tomada de decisão.",
@@ -34,7 +39,7 @@ export const macleErpCasePage = {
       "O trabalho também considerou a frequência de uso das funcionalidades, priorizando acessos rápidos, redução de etapas e maior eficiência nas tarefas mais recorrentes.",
     ],
     results: [
-      "O redesenho resultou em uma experiência mais eficiente e orientada à operação, com projeção de 35% de redução no tempo de execução de tarefas críticas, 29% menos dependência de suporte para dúvidas operacionais e um aumento de 31% na produtividade percebida pelos usuários.",
+      "O redesenho resultou em uma experiência mais eficiente e orientada à operação, reduzindo a fricção nas tarefas críticas e deixando a rotina de uso mais clara e previsível para o time.",
       "Além dos ganhos operacionais, o projeto estabeleceu uma base mais consistente para evolução do sistema, tornando o ERP mais escalável e alinhado às necessidades reais das lojas.",
     ],
   },

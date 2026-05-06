@@ -23,7 +23,7 @@ export default function NotFound() {
             <Link href="/" className="button-primary">
               Ir para home
             </Link>
-            <Link href="/cases" className="button-secondary">
+            <Link href="/#cases" className="button-secondary">
               Ver cases
             </Link>
           </div>

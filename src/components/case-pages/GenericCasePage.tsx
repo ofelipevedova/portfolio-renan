@@ -43,7 +43,7 @@ export function GenericCasePage({ item }: GenericCasePageProps) {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
-                  <Link href="/cases" className="button-primary">
+                  <Link href="/#cases" className="button-primary">
                     Voltar para cases
                   </Link>
                   <Link href="/#contato" className="button-secondary">

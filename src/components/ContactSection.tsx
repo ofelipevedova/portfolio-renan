@@ -19,7 +19,8 @@ type ContactSectionProps = {
 const contactEmail = site.contactEmail;
 
 const contactBreadcrumbItems = [
-  { label: "Inicio", href: "/" },
+  { label: "Inicio", href: "/#inicio" },
+  { label: "Cases", href: "/#cases" },
   { label: "Background", href: "/#background" },
   { label: "Posts", href: "/#posts" },
   { label: "Contato", href: "/#contato" },
@@ -61,23 +62,14 @@ function ContactBreadcrumbTrail() {
           </>
         );
 
-        if (isActive) {
-          return (
-            <span
-              key={item.label}
-              aria-current="page"
-              className="inline-flex items-center gap-3 font-medium text-accent"
-            >
-              {content}
-            </span>
-          );
-        }
-
         return (
           <Link
             key={item.label}
             href={item.href}
-            className="inline-flex items-center gap-3 text-ink/70 transition hover:text-ink"
+            aria-current={isActive ? "page" : undefined}
+            className={`inline-flex items-center gap-3 transition ${
+              isActive ? "font-medium text-accent" : "text-ink/70 hover:text-ink"
+            }`}
           >
             {content}
           </Link>

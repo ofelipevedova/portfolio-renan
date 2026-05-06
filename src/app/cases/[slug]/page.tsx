@@ -4,10 +4,12 @@ import { notFound } from "next/navigation";
 import { GenericCasePage } from "@/components/case-pages/GenericCasePage";
 import { MacleErpCasePage } from "@/components/case-pages/MacleErpCasePage";
 import { PortalAnaliseDocumentosCasePage } from "@/components/case-pages/PortalAnaliseDocumentosCasePage";
+import { PortalValidadorDocumentosCasePage } from "@/components/case-pages/PortalValidadorDocumentosCasePage";
 import { PegaAReceitaCasePage } from "@/components/case-pages/PegaAReceitaCasePage";
 import { WebsiteBuilderMacleCasePage } from "@/components/case-pages/WebsiteBuilderMacleCasePage";
 import { cases } from "@/data/cases";
 import { portalAnaliseDocumentosCasePage } from "@/data/case-pages/portal-analise-documentos-por-ai";
+import { portalValidadorDocumentosCasePage } from "@/data/case-pages/portal-validador-de-documentos";
 import { pegaAReceitaCasePage } from "@/data/case-pages/pega-a-receita";
 import { macleErpCasePage } from "@/data/case-pages/macle-erp";
 import { websiteBuilderMacleCasePage } from "@/data/case-pages/website-builder-macle";
@@ -15,12 +17,12 @@ import { publicUrl } from "@/lib/site-path";
 
 const caseSlugAliases = {
   "construtor-de-sites-macle": "website-builder-macle",
-  "portal-validador-de-documentos": "pega-a-receita",
 } as const;
 
 const detailedCasePages = [
   macleErpCasePage,
   portalAnaliseDocumentosCasePage,
+  portalValidadorDocumentosCasePage,
   pegaAReceitaCasePage,
   websiteBuilderMacleCasePage,
 ] as const;
@@ -105,6 +107,10 @@ export default async function CasePage({ params }: CasePageProps) {
 
   if (canonicalSlug === portalAnaliseDocumentosCasePage.slug) {
     return <PortalAnaliseDocumentosCasePage />;
+  }
+
+  if (canonicalSlug === portalValidadorDocumentosCasePage.slug) {
+    return <PortalValidadorDocumentosCasePage />;
   }
 
   if (canonicalSlug === pegaAReceitaCasePage.slug) {
