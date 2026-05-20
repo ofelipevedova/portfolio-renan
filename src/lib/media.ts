@@ -11,12 +11,14 @@ export const media = {
   cases: {
     covers: {
       construtorDeSitesMacle:
-        "/assets/cases/covers/construtor-de-sites-macle.png",
+        "/assets/cases/covers/web-builder.png",
       pegaAReceita: "/assets/cases/covers/pega-a-receita-site.png",
-      macleErp: "/assets/cases/covers/macle-erp.png",
+      macleErp: "/assets/cases/covers/erp-macle.png",
       bemsignAnaliseDocumentos:
-        "/assets/cases/covers/bemsign-analise-documentos-por-ia.png",
-      portalValidador: "/assets/cases/portal-validador/01.png",
+        "/assets/cases/covers/porta-documentos.png",
+      evitarConstruirProdutoErrado:
+        "/assets/cases/covers/evitar-construir-produto-errado.svg",
+      portalValidador: "/assets/cases/covers/portal-validador.png",
     },
     shared: {
       macleBuilderShowcase: "/assets/cases/shared/macle-builder-showcase.jpg",
@@ -88,6 +90,6 @@ export const media = {
     renanPortrait: "/assets/people/renan/portrait.jpg",
   },
   curriculum: {
-    pdf: "/files/curriculo/renan-f-vedova-curriculo.pdf",
+    pdf: "/files/curriculo/renan-f-vedvova-currículo.pdf",
   },
 } as const;

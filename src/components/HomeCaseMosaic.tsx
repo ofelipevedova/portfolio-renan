@@ -60,24 +60,38 @@ function CaseMosaicCard({
       <Link
         id={id}
         href={`/cases/${item.slug}`}
-        className="group flex h-full flex-col overflow-hidden bg-transparent text-ink md:h-[500px] md:cursor-none"
+        className="group relative block w-full overflow-hidden md:cursor-none"
         aria-label={`Abrir case ${displayTitle}`}
         onPointerEnter={handlePointerMove}
         onPointerMove={handlePointerMove}
       >
-        <div className="relative aspect-[1069/597] w-full overflow-hidden md:min-h-0 md:flex-1 md:aspect-auto">
-          <Image
-            src={publicPath(item.cover.src)}
-            alt={item.cover.alt}
-            fill
-            quality={90}
-            className="object-cover transition-transform duration-500 ease-out will-change-transform transform-gpu group-hover:scale-[1.02]"
-            style={{
-              objectPosition: item.cover.objectPosition ?? "center center",
-            }}
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+        <div className="relative aspect-[3/4] w-full overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={item.cover.scale ? { transform: `scale(${item.cover.scale})` } : undefined}
+          >
+            <Image
+              src={publicPath(item.cover.src)}
+              alt={item.cover.alt}
+              fill
+              unoptimized={item.cover.src.endsWith(".svg")}
+              quality={90}
+              className="object-cover"
+              style={{
+                objectPosition: item.cover.objectPosition ?? "center center",
+              }}
+              sizes="(max-width: 768px) 50vw, 25vw"
+            />
+          </div>
 
+          {/* Title overlay */}
+          <div className="absolute inset-x-0 bottom-0 z-10 translate-y-1 bg-gradient-to-t from-black/60 to-transparent px-4 pb-4 pt-12 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            <h3 className="font-display text-xl leading-none tracking-[-0.04em] text-white">
+              {displayTitle}
+            </h3>
+          </div>
+
+          {/* Custom cursor */}
           <div
             ref={cursorRef}
             className="pointer-events-none absolute left-0 top-0 z-20 hidden opacity-0 transition-opacity duration-150 md:block group-hover:opacity-100"
@@ -110,18 +124,6 @@ function CaseMosaicCard({
               </div>
             </div>
           </div>
-
-        </div>
-
-        <div className="px-1 pt-4 md:px-0 md:pt-5">
-          <div className="flex w-full items-baseline justify-between gap-4">
-            <h3 className="min-w-0 font-display text-2xl leading-none tracking-[-0.04em] text-ink">
-              {displayTitle}
-            </h3>
-            <p className="shrink-0 font-display text-[20px] leading-none tracking-[-0.04em] text-muted">
-              {item.year}
-            </p>
-          </div>
         </div>
       </Link>
     </Reveal>
@@ -129,39 +131,16 @@ function CaseMosaicCard({
 }
 
 export function HomeCaseMosaic({ items }: HomeCaseMosaicProps) {
-  const rows = items.reduce<PortfolioCase[][]>((acc, item, index) => {
-    const rowIndex = Math.floor(index / 2);
-
-    if (!acc[rowIndex]) {
-      acc[rowIndex] = [];
-    }
-
-    acc[rowIndex].push(item);
-    return acc;
-  }, []);
-
   return (
-    <div className="space-y-4 md:space-y-6">
-      {rows.map((row, rowIndex) => {
-        return (
-          <div
-            key={`row-${rowIndex}`}
-            className="grid gap-4 md:h-[500px] md:grid-cols-2"
-          >
-            {row.map((item, itemIndex) => (
-              <CaseMosaicCard
-                key={item.slug}
-                item={item}
-                delay={(rowIndex * 2 + itemIndex) * 90}
-                id={rowIndex === 0 && itemIndex === 0 ? "cases" : undefined}
-              />
-            ))}
-            {row.length === 1 ? (
-              <div aria-hidden="true" className="hidden md:block md:invisible" />
-            ) : null}
-          </div>
-        );
-      })}
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+      {items.map((item, index) => (
+        <CaseMosaicCard
+          key={item.slug}
+          item={item}
+          delay={index * 90}
+          id={index === 0 ? "cases" : undefined}
+        />
+      ))}
     </div>
   );
 }

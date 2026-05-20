@@ -63,6 +63,7 @@ export function GenericCasePage({ item }: GenericCasePageProps) {
                   alt={item.cover.alt}
                   fill
                   priority
+                  unoptimized={item.cover.src.endsWith(".svg")}
                   quality={90}
                   className="object-cover transform-gpu"
                   style={{ objectPosition: item.cover.objectPosition ?? "center center" }}

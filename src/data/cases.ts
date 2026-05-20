@@ -35,6 +35,7 @@ export type PortfolioCase = {
     src: string;
     alt: string;
     objectPosition?: string;
+    scale?: number;
   };
   metrics: CaseMetric[];
   sections: CaseSection[];
@@ -111,77 +112,6 @@ export const cases: PortfolioCase[] = [
         src: media.brands.acehub,
         alt: "Logo azul minimalista",
         label: "Marca azul",
-      },
-    ],
-  },
-  {
-    slug: "pega-a-receita",
-    title: "Pega a Receita",
-    category: "Site",
-    year: "2025",
-    summary:
-      "Site de receitas com leitura rápida, descoberta clara e navegação pensada para uso recorrente.",
-    overview:
-      "A experiência organiza categorias, busca e receitas favoritas para manter o conteúdo fácil de encontrar e consumir.",
-    cover: {
-      src: media.cases.covers.pegaAReceita,
-      alt: "Capa do site Pega a receita com receitas em destaque",
-      objectPosition: "center center",
-    },
-    metrics: [
-      { value: "Busca", label: "descoberta de receitas" },
-      { value: "Mobile", label: "experiência priorizada" },
-      { value: "Escala", label: "conteúdo pronto para crescer" },
-    ],
-    sections: [
-      {
-        title: "Validação imediata",
-        text:
-          "A tela principal foi pensada para destacar o documento, o contexto e a ação prioritária sem dispersar a atenção do usuário.",
-      },
-      {
-        title: "Leitura operacional",
-        text:
-          "Os blocos de informação permitem uma leitura rápida da situação de cada item, com espaço para histórico, sinais de verificação e próximos passos.",
-      },
-      {
-        title: "Confiabilidade",
-        text:
-          "A apresentação do portal sustenta uma sensação de controle e precisão, importante para fluxos em que o detalhe visual importa tanto quanto o resultado.",
-      },
-    ],
-    gallery: [
-      {
-        src: media.cases.shared.documentValidationScreen,
-        alt: "Portal validador de documentos em laptop",
-        caption: "Capa do portal.",
-      },
-      {
-        src: media.cases.shared.documentListing,
-        alt: "Listagem de documentos em tela tablet",
-        caption: "Fila de análise e acompanhamento.",
-      },
-      {
-        src: media.cases.shared.macleLoginScreen,
-        alt: "Tela de login do ecossistema Macle",
-        caption: "Acesso ao ambiente operacional.",
-      },
-    ],
-    logos: [
-      {
-        src: media.brands.guiaMoto,
-        alt: "Logo Guia Moto",
-        label: "Guia Moto",
-      },
-      {
-        src: media.brands.vulpistudio,
-        alt: "Logo geométrico escuro",
-        label: "Marca escura",
-      },
-      {
-        src: media.brands.ghBrantech,
-        alt: "Logo GH",
-        label: "GH",
       },
     ],
   },
@@ -401,11 +331,10 @@ export const cases: PortfolioCase[] = [
 ];
 
 const caseDisplayOrder = [
-  "macle-sistema-erp",
-  "website-builder-macle",
   "portal-validador-de-documentos",
   "portal-analise-de-documentos-por-ai",
-  "pega-a-receita",
+  "macle-sistema-erp",
+  "website-builder-macle",
 ] as const;
 
 const caseDisplayPriority = new Map<string, number>(

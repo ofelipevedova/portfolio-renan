@@ -28,6 +28,7 @@ export function CaseCard({ item, index, compact = false }: CaseCardProps) {
             alt={item.cover.alt}
             fill
             priority={index === 0}
+            unoptimized={item.cover.src.endsWith(".svg")}
             quality={90}
             className="object-cover transition-transform duration-500 ease-out will-change-transform transform-gpu group-hover:scale-[1.025]"
             style={{ objectPosition: item.cover.objectPosition ?? "center center" }}

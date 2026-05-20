@@ -97,15 +97,6 @@ type PostItem = {
 
 const backgroundExperiences: BackgroundExperience[] = [
   {
-    company: "Acehub",
-    role: "Sênior UX/UI Designer",
-    period: "2025 - o momento",
-    description:
-      "Responsável pela criação do Design system e atualização da solução, focando em melhorias dos fluxos e criação de novas features.",
-    logoSrc: media.brands.acehub,
-    logoAlt: "Logo da Acehub",
-  },
-  {
     company: "VulpiStudio",
     role: "Founder / Diretor de design",
     period: "2021 - o momento",
@@ -117,6 +108,15 @@ const backgroundExperiences: BackgroundExperience[] = [
       label: "vulpistudio.com",
       href: "https://vulpistudio.com",
     },
+  },
+  {
+    company: "Acehub",
+    role: "Sênior UX/UI Designer",
+    period: "2025 - 2026",
+    description:
+      "Responsável pela criação do Design system e atualização da solução, focando em melhorias dos fluxos e criação de novas features.",
+    logoSrc: media.brands.acehub,
+    logoAlt: "Logo da Acehub",
   },
   {
     company: "DBC Company",
