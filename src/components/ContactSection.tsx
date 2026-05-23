@@ -1,16 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
+import { Breadcrumb } from "@/components/Breadcrumb";
+import { CopyToast } from "@/components/CopyToast";
 import { Reveal } from "@/components/Reveal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { site } from "@/data/site";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 import { media } from "@/lib/media";
 import { publicPath } from "@/lib/site-path";
-
-type NavKey = "inicio" | "cases" | "background" | "posts" | "contato";
 
 const contactEmail = site.contactEmail;
 
@@ -32,44 +31,6 @@ const contactLinks = [
   },
 ];
 
-function ContactBreadcrumbTrail({
-  nav,
-}: {
-  nav: { inicio: string; cases: string; background: string; posts: string; contato: string };
-}) {
-  const items: { key: NavKey; label: string; href: string }[] = [
-    { key: "inicio", label: nav.inicio, href: "/#inicio" },
-    { key: "cases", label: nav.cases, href: "/#cases" },
-    { key: "background", label: nav.background, href: "/#background" },
-    { key: "posts", label: nav.posts, href: "/#posts" },
-    { key: "contato", label: nav.contato, href: "/#contato" },
-  ];
-
-  return (
-    <nav
-      aria-label="Breadcrumb"
-      className="flex flex-wrap items-center gap-x-10 gap-y-3 text-[17px] leading-none tracking-[-0.03em] md:text-[19px]"
-    >
-      {items.map((item) => {
-        const isActive = item.key === "contato";
-        return (
-          <Link
-            key={item.key}
-            href={item.href}
-            aria-current={isActive ? "page" : undefined}
-            className={`inline-flex items-center gap-3 transition ${
-              isActive ? "font-medium text-accent" : "text-ink/70 hover:text-ink"
-            }`}
-          >
-            <span>/</span>
-            <span>{item.label}</span>
-          </Link>
-        );
-      })}
-    </nav>
-  );
-}
-
 function ArrowIcon() {
   return (
     <svg
@@ -88,32 +49,20 @@ function ArrowIcon() {
   );
 }
 
-function CopyToast({ message }: { message: string }) {
-  return (
-    <div
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border border-black/10 bg-white px-4 py-2 text-[13px] tracking-[-0.02em] text-ink"
-    >
-      {message}
-    </div>
-  );
-}
-
 export function ContactSection() {
   const { t } = useLanguage();
   const { copied: toastVisible, copy: handleCopyEmail } = useCopyToClipboard();
 
   const curriculumHref = publicPath(media.curriculum.pdf);
-  const curriculumFilename = t.contact.curriculumLabel === "Resume"
-    ? "Renan F. Vedova - Resume.pdf"
-    : "Renan F. Vedova - Currículo.pdf";
+  const curriculumFilename =
+    t.contact.curriculumLabel === "Resume"
+      ? "Renan F. Vedova - Resume.pdf"
+      : "Renan F. Vedova - Currículo.pdf";
 
   return (
     <section id="contato" className="page-shell pt-14 md:pt-6">
       <div className="mx-auto flex w-full max-w-4xl flex-col items-start">
-        <ContactBreadcrumbTrail nav={t.nav} />
+        <Breadcrumb activeKey="contato" nav={t.nav} />
 
         <Reveal className="mt-16 grid w-full gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
           <div className="relative aspect-[381/428] w-full max-w-[23rem] overflow-hidden bg-white">
@@ -162,7 +111,6 @@ export function ContactSection() {
                     <ArrowIcon />
                   </a>
                 ))}
-
                 <a
                   href={curriculumHref}
                   download={curriculumFilename}

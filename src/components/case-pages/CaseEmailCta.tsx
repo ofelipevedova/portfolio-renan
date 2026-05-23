@@ -1,24 +1,12 @@
 "use client";
 
+import { CopyToast } from "@/components/CopyToast";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 
 type CaseEmailCtaProps = {
   label: string;
   email: string;
 };
-
-function CopyToast({ message }: { message: string }) {
-  return (
-    <div
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border border-black/10 bg-white px-4 py-2 text-[13px] tracking-[-0.02em] text-ink"
-    >
-      {message}
-    </div>
-  );
-}
 
 export function CaseEmailCta({ label, email }: CaseEmailCtaProps) {
   const { copied: toastVisible, copy: handleCopyEmail } = useCopyToClipboard();

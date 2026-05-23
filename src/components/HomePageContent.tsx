@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { ContactSection } from "@/components/ContactSection";
 import { HeroCarousel, type HeroCarouselItem } from "@/components/HeroCarousel";
 import { HomeCaseMosaic } from "@/components/HomeCaseMosaic";
@@ -11,7 +12,6 @@ import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { casesByDisplayOrder } from "@/data/cases";
-import { site } from "@/data/site";
 import { media } from "@/lib/media";
 import { publicPath } from "@/lib/site-path";
 
@@ -84,47 +84,6 @@ const postHrefs = [
   "https://medium.com/@felipevedova/o-uso-de-tags-contextuais-por-geolocaliza%C3%A7%C3%A3o-em-lojas-virtuais-melhorando-a-experi%C3%AAncia-do-cliente-025a1a0081d8",
 ] as const;
 
-type NavKey = "inicio" | "cases" | "background" | "posts" | "contato";
-
-function BreadcrumbTrail({
-  activeKey,
-  nav,
-}: {
-  activeKey: NavKey;
-  nav: { inicio: string; cases: string; background: string; posts: string; contato: string };
-}) {
-  const items: { key: NavKey; label: string; href: string }[] = [
-    { key: "inicio", label: nav.inicio, href: "/#inicio" },
-    { key: "cases", label: nav.cases, href: "/#cases" },
-    { key: "background", label: nav.background, href: "/#background" },
-    { key: "posts", label: nav.posts, href: "/#posts" },
-    { key: "contato", label: nav.contato, href: "/#contato" },
-  ];
-
-  return (
-    <nav
-      aria-label="Breadcrumb"
-      className="flex flex-wrap items-center gap-x-10 gap-y-3 text-[17px] leading-none tracking-[-0.03em] md:text-[19px]"
-    >
-      {items.map((item) => {
-        const isActive = item.key === activeKey;
-        return (
-          <Link
-            key={item.key}
-            href={item.href}
-            aria-current={isActive ? "page" : undefined}
-            className={`inline-flex items-center gap-3 transition ${
-              isActive ? "font-medium text-accent" : "text-ink/70 hover:text-ink"
-            }`}
-          >
-            <span>/</span>
-            <span>{item.label}</span>
-          </Link>
-        );
-      })}
-    </nav>
-  );
-}
 
 function BackgroundExperienceCard({
   company,
@@ -281,7 +240,7 @@ export function HomePageContent() {
               <div className="flex w-full items-center justify-between gap-4">
                 <div className="min-w-0 flex-1">
                   <div className="mx-auto w-full max-w-4xl">
-                    <BreadcrumbTrail activeKey="inicio" nav={t.nav} />
+                    <Breadcrumb activeKey="inicio" nav={t.nav} />
                   </div>
                 </div>
                 <LanguageToggle />
@@ -333,7 +292,7 @@ export function HomePageContent() {
 
         <section id="background" className="page-shell pt-14 md:pt-6">
           <div className="mx-auto flex w-full max-w-4xl flex-col items-start">
-            <BreadcrumbTrail activeKey="background" nav={t.nav} />
+            <Breadcrumb activeKey="background" nav={t.nav} />
 
             <p className="mt-12 max-w-[46rem] text-[18px] leading-[1.48] tracking-[-0.01em] text-ink/85 md:mt-14 md:text-[20px]">
               {t.background.intro}
@@ -353,7 +312,7 @@ export function HomePageContent() {
 
         <section id="posts" className="page-shell pt-14 md:pt-6">
           <div className="mx-auto flex w-full max-w-4xl flex-col items-start">
-            <BreadcrumbTrail activeKey="posts" nav={t.nav} />
+            <Breadcrumb activeKey="posts" nav={t.nav} />
 
             <div className="mt-10 space-y-10 md:mt-12 md:space-y-12">
               {t.posts.items.map((item, index) => (
