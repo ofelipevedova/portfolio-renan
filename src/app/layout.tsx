@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
+import { ClickEffect } from "@/components/ClickEffect";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { site } from "@/data/site";
 import { publicUrl } from "@/lib/site-path";
@@ -47,6 +48,7 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-bg font-sans text-ink">
           <LanguageProvider>{children}</LanguageProvider>
+          <ClickEffect />
         </body>
     </html>
   );
