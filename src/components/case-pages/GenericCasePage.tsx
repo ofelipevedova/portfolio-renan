@@ -199,10 +199,7 @@ export function GenericCasePage({ item }: GenericCasePageProps) {
           </div>
         </section>
 
-        <ContactSection
-          title="O último bloco também pode carregar a sua presença."
-          description="A página de case termina com o retrato final, o que ajuda a amarrar a história do projeto com a pessoa que o construiu."
-        />
+        <ContactSection />
       </main>
       <SiteFooter />
     </>

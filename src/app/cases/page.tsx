@@ -50,10 +50,7 @@ export default function CasesPage() {
           </div>
         </section>
 
-        <ContactSection
-          title="Fechamento pronto para a apresentação do case."
-          description="A versão de arquivo mantém o retrato final e os links de contato no mesmo padrão da home."
-        />
+        <ContactSection />
       </main>
       <SiteFooter />
     </>
