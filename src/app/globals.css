@@ -173,34 +173,44 @@
   will-change: transform;
 }
 
-/* Click effect */
-.click-dot {
+/* Click burst effect */
+.burst-center {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #434343;
-  transform: translate(-50%, -50%);
-  animation: click-dot 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  top: -2px;
+  left: -2px;
+  animation: burst-center 0.28s ease-out forwards;
 }
 
-.click-ring {
+.burst-ray-wrapper {
   position: absolute;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1.5px solid #434343;
-  transform: translate(-50%, -50%) scale(0);
-  animation: click-ring 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
 }
 
-@keyframes click-dot {
-  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
-  60%  { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
-  100% { transform: translate(-50%, -50%) scale(0);   opacity: 0; }
+.burst-ray-inner {
+  position: absolute;
+  width: 1.5px;
+  height: 8px;
+  background: #434343;
+  border-radius: 1px;
+  left: -0.75px;
+  top: -4px;
+  animation: burst-ray-out 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes click-ring {
-  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+@keyframes burst-center {
+  0%   { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(0);   opacity: 0; }
+}
+
+@keyframes burst-ray-out {
+  0%   { top: -3px;  height: 8px; opacity: 1; }
+  60%  {             height: 6px; opacity: 0.7; }
+  100% { top: -22px; height: 3px; opacity: 0; }
 }
