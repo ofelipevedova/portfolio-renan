@@ -172,3 +172,46 @@
   animation: marquee-reverse 38s linear infinite;
   will-change: transform;
 }
+
+/* Click effect */
+.click-effect {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
+.click-effect::before,
+.click-effect::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+}
+
+.click-effect::before {
+  width: 6px;
+  height: 6px;
+  background: #434343;
+  animation: click-dot 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.click-effect::after {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #434343;
+  animation: click-ring 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes click-dot {
+  0%   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  60%  { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+@keyframes click-ring {
+  0%   { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
