@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import { site } from "@/data/site";
 import { publicUrl } from "@/lib/site-path";
 
@@ -44,7 +45,9 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-bg font-sans text-ink">{children}</body>
+      <body className="min-h-full bg-bg font-sans text-ink">
+          <LanguageProvider>{children}</LanguageProvider>
+        </body>
     </html>
   );
 }

@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
 export function SiteFooter() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
@@ -9,7 +14,7 @@ export function SiteFooter() {
         <div className="grid gap-4 text-[10px] uppercase tracking-[0.18em] text-muted md:grid-cols-[1fr_auto_1fr] md:items-center">
           <p className="text-left">© {year} RENAN FELIPE VEDOVA</p>
           <p className="text-center">
-            Inspirado por{" "}
+            {t.footer.inspiredBy}{" "}
             <Link
               href="https://billysweeney.com/"
               target="_blank"
@@ -19,7 +24,7 @@ export function SiteFooter() {
               BillySweeney
             </Link>
           </p>
-          <p className="text-left md:text-right">TODOS OS DIREITOS RESERVADOS</p>
+          <p className="text-left md:text-right">{t.footer.rights}</p>
         </div>
       </div>
     </footer>

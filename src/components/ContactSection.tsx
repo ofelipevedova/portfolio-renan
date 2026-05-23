@@ -1,77 +1,68 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import { Reveal } from "@/components/Reveal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { site } from "@/data/site";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 import { media } from "@/lib/media";
 import { publicPath } from "@/lib/site-path";
 
-type ContactSectionProps = {
-  title?: string;
-  description?: string;
-  portraitSrc?: string;
-  portraitAlt?: string;
-};
+type NavKey = "inicio" | "cases" | "background" | "posts" | "contato";
 
 const contactEmail = site.contactEmail;
 
-const contactBreadcrumbItems = [
-  { label: "Inicio", href: "/#inicio" },
-  { label: "Cases", href: "/#cases" },
-  { label: "Background", href: "/#background" },
-  { label: "Posts", href: "/#posts" },
-  { label: "Contato", href: "/#contato" },
-] as const;
-
 const contactLinks = [
   {
+    key: "linkedin" as const,
     label: "Linkedin",
     href: "https://br.linkedin.com/in/renanfelipevedova-ux-designer",
   },
   {
+    key: "medium" as const,
     label: "Medium",
     href: "https://medium.com/@felipevedova",
   },
   {
+    key: "vulpistudio" as const,
     label: "vulpistudio",
     href: "https://vulpistudio.com",
   },
-  {
-    label: "Currículo",
-    href: publicPath(media.curriculum.pdf),
-    download: "Renan F. Vedova - Currículo.pdf",
-  },
-] as const;
+];
 
-function ContactBreadcrumbTrail() {
+function ContactBreadcrumbTrail({
+  nav,
+}: {
+  nav: { inicio: string; cases: string; background: string; posts: string; contato: string };
+}) {
+  const items: { key: NavKey; label: string; href: string }[] = [
+    { key: "inicio", label: nav.inicio, href: "/#inicio" },
+    { key: "cases", label: nav.cases, href: "/#cases" },
+    { key: "background", label: nav.background, href: "/#background" },
+    { key: "posts", label: nav.posts, href: "/#posts" },
+    { key: "contato", label: nav.contato, href: "/#contato" },
+  ];
+
   return (
     <nav
       aria-label="Breadcrumb"
       className="flex flex-wrap items-center gap-x-10 gap-y-3 text-[17px] leading-none tracking-[-0.03em] md:text-[19px]"
     >
-      {contactBreadcrumbItems.map((item) => {
-        const isActive = item.label === "Contato";
-
-        const content = (
-          <>
-            <span>/</span>
-            <span>{item.label}</span>
-          </>
-        );
-
+      {items.map((item) => {
+        const isActive = item.key === "contato";
         return (
           <Link
-            key={item.label}
+            key={item.key}
             href={item.href}
             aria-current={isActive ? "page" : undefined}
             className={`inline-flex items-center gap-3 transition ${
               isActive ? "font-medium text-accent" : "text-ink/70 hover:text-ink"
             }`}
           >
-            {content}
+            <span>/</span>
+            <span>{item.label}</span>
           </Link>
         );
       })}
@@ -110,24 +101,25 @@ function CopyToast({ message }: { message: string }) {
   );
 }
 
-export function ContactSection({
-  title = "Minha prioridade é sempre garantir que o design seja baseado em uma compreensão profunda dos usuários e dos objetivos do negócio, utilizando ferramentas e métodos que tragam o melhor resultado para cada situação.",
-  description,
-  portraitSrc = media.people.renanPortrait,
-  portraitAlt = "Retrato em preto e branco do autor do portfólio",
-}: ContactSectionProps) {
+export function ContactSection() {
+  const { t } = useLanguage();
   const { copied: toastVisible, copy: handleCopyEmail } = useCopyToClipboard();
+
+  const curriculumHref = publicPath(media.curriculum.pdf);
+  const curriculumFilename = t.contact.curriculumLabel === "Resume"
+    ? "Renan F. Vedova - Resume.pdf"
+    : "Renan F. Vedova - Currículo.pdf";
 
   return (
     <section id="contato" className="page-shell pt-14 md:pt-6">
       <div className="mx-auto flex w-full max-w-4xl flex-col items-start">
-        <ContactBreadcrumbTrail />
+        <ContactBreadcrumbTrail nav={t.nav} />
 
         <Reveal className="mt-16 grid w-full gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
           <div className="relative aspect-[381/428] w-full max-w-[23rem] overflow-hidden bg-white">
             <Image
-              src={publicPath(portraitSrc)}
-              alt={portraitAlt}
+              src={publicPath(media.people.renanPortrait)}
+              alt={t.contact.portraitAlt}
               fill
               className="object-cover object-top"
               sizes="(max-width: 1024px) 100vw, 38vw"
@@ -137,27 +129,19 @@ export function ContactSection({
           <div className="flex h-full min-h-[24rem] flex-col">
             <div className="flex max-w-[32rem] items-start gap-4">
               <span className="mt-1 text-3xl leading-none text-ink">&ldquo;</span>
-              <div className="space-y-4">
-                <p className="text-[18px] leading-[1.52] tracking-[-0.01em] text-ink/85 md:text-[20px]">
-                  {title}
-                </p>
-                {description ? (
-                  <p className="max-w-[30rem] text-sm leading-7 text-ink/70 md:text-base">
-                    {description}
-                  </p>
-                ) : null}
-              </div>
+              <p className="text-[18px] leading-[1.52] tracking-[-0.01em] text-ink/85 md:text-[20px]">
+                {t.contact.title}
+              </p>
             </div>
 
             <div className="mt-14">
               <p className="text-[18px] leading-7 tracking-[-0.02em] text-ink/80">
-                Entre em contato
+                {t.contact.getInTouch}
               </p>
               <button
                 type="button"
                 onClick={() => handleCopyEmail(contactEmail)}
                 className="mt-4 block w-fit cursor-pointer font-sans text-[clamp(2.1rem,4vw,3.8rem)] leading-[0.98] tracking-[-0.06em] text-left text-ink transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4"
-                style={{ cursor: "pointer" }}
                 aria-label="Copiar e-mail para a área de transferência"
               >
                 {contactEmail}
@@ -166,42 +150,34 @@ export function ContactSection({
 
             <div className="mt-auto pt-12">
               <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-[14px] tracking-[-0.02em] text-ink md:text-[15px]">
-                {contactLinks.map((item) => {
-                  if ("download" in item) {
-                    return (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        download={item.download}
-                        className="group inline-flex items-center gap-2 transition hover:text-accent"
-                      >
-                        <span>{item.label}</span>
-                        <ArrowIcon />
-                      </a>
-                    );
-                  }
+                {contactLinks.map((item) => (
+                  <a
+                    key={item.key}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex items-center gap-2 transition hover:text-accent"
+                  >
+                    <span>{item.label}</span>
+                    <ArrowIcon />
+                  </a>
+                ))}
 
-                  return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group inline-flex items-center gap-2 transition hover:text-accent"
-                    >
-                      <span>{item.label}</span>
-                      <ArrowIcon />
-                    </a>
-                  );
-                })}
+                <a
+                  href={curriculumHref}
+                  download={curriculumFilename}
+                  className="group inline-flex items-center gap-2 transition hover:text-accent"
+                >
+                  <span>{t.contact.curriculumLabel}</span>
+                  <ArrowIcon />
+                </a>
               </div>
             </div>
           </div>
         </Reveal>
       </div>
 
-      {toastVisible ? <CopyToast message="E-mail copiado" /> : null}
+      {toastVisible ? <CopyToast message={t.contact.emailCopied} /> : null}
     </section>
   );
 }
-
