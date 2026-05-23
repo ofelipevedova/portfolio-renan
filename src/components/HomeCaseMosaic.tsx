@@ -56,16 +56,16 @@ function CaseMosaicCard({
   );
 
   return (
-    <Reveal className="h-full" delay={delay}>
+    <Reveal className="h-full max-h-[597px] reveal-card" delay={delay}>
       <Link
         id={id}
         href={`/cases/${item.slug}`}
-        className="group relative block w-full overflow-hidden md:cursor-none"
+        className="group relative block w-full max-h-[597px] overflow-hidden md:cursor-none"
         aria-label={`Abrir case ${displayTitle}`}
         onPointerEnter={handlePointerMove}
         onPointerMove={handlePointerMove}
       >
-        <div className="relative aspect-[3/4] w-full overflow-hidden">
+        <div className="relative aspect-[3/4] w-full max-h-[597px] overflow-hidden">
           <div
             className="absolute inset-0"
             style={item.cover.scale ? { transform: `scale(${item.cover.scale})` } : undefined}
@@ -132,7 +132,7 @@ function CaseMosaicCard({
 
 export function HomeCaseMosaic({ items }: HomeCaseMosaicProps) {
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
       {items.map((item, index) => (
         <CaseMosaicCard
           key={item.slug}
