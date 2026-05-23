@@ -21,15 +21,30 @@ export function ClickEffect() {
   }, [handleMouseDown]);
 
   return (
-    <>
+    <div
+      aria-hidden="true"
+      style={{
+        position: "fixed",
+        inset: 0,
+        pointerEvents: "none",
+        zIndex: 9999,
+        overflow: "hidden",
+      }}
+    >
       {markers.map((m) => (
-        <span
+        <div
           key={m.id}
-          aria-hidden="true"
-          className="click-effect"
-          style={{ left: m.x, top: m.y }}
-        />
+          style={{
+            position: "absolute",
+            left: m.x,
+            top: m.y,
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <div className="click-dot" />
+          <div className="click-ring" />
+        </div>
       ))}
-    </>
+    </div>
   );
 }
