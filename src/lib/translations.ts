@@ -45,6 +45,7 @@ type TranslationData = {
   footer: {
     rights: string;
     inspiredBy: string;
+    slogan: string;
   };
 };
 
@@ -134,6 +135,7 @@ export const translations: Record<Language, TranslationData> = {
     footer: {
       rights: "TODOS OS DIREITOS RESERVADOS",
       inspiredBy: "Inspirado por",
+      slogan: "Design, craft e experiência em cada detalhe",
     },
   },
 
@@ -222,6 +224,7 @@ export const translations: Record<Language, TranslationData> = {
     footer: {
       rights: "ALL RIGHTS RESERVED",
       inspiredBy: "Inspired by",
+      slogan: "Design, craft and experience in every detail",
     },
   },
 };

@@ -18,6 +18,8 @@ export const media = {
         "/assets/cases/covers/porta-documentos.png",
       evitarConstruirProdutoErrado:
         "/assets/cases/covers/evitar-construir-produto-errado.svg",
+      assinaturasFrutasFrescas:
+        "/assets/cases/covers/assinaturas-frutas-frescas.jpg",
       portalValidador: "/assets/cases/covers/portal-validador.png",
     },
     shared: {

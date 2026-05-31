@@ -45,6 +45,62 @@ export type PortfolioCase = {
 
 export const cases: PortfolioCase[] = [
   {
+    slug: "assinaturas-de-frutas-frescas",
+    title: "Assinaturas de frutas frescas",
+    category: "Produto",
+    year: "2026",
+    summary:
+      "Discovery estratégico que revelou uma falha estrutural na hipótese inicial e gerou uma arquitetura de produto completamente nova.",
+    overview:
+      "O processo partiu de uma ideia crua do stakeholder e, via benchmarking e análise de hipótese, chegou a uma proposta de valor sólida — eliminando o que comprometia a retenção antes do primeiro mês.",
+    cover: {
+      src: media.cases.covers.assinaturasFrutasFrescas,
+      alt: "Visualização abstrata dos três planos de assinatura — mensal eliminado, quinzenal e semanal",
+      objectPosition: "center center",
+    },
+    metrics: [
+      { value: "Discovery", label: "processo completo" },
+      { value: "Benchmarking", label: "análise de mercado" },
+      { value: "Arquitetura", label: "3 planos redesenhados" },
+    ],
+    sections: [
+      {
+        title: "O cenário",
+        text: "Uma startup de foodtech queria lançar um app de assinaturas de frutas frescas com planos mensal, quinzenal e semanal. O discovery identificou uma falha estrutural no plano mensal antes de qualquer linha de código.",
+      },
+      {
+        title: "O que foi encontrado",
+        text: "O benchmarking confirmou um mercado em crescimento (74% ao ano) mas fragmentado. O teste de estresse da hipótese revelou que frutas têm ciclo de maturação de 5 a 8 dias — incompatível com entrega mensal.",
+      },
+      {
+        title: "A nova arquitetura",
+        text: "O plano mensal foi eliminado. A estrutura foi redesenhada com três tiers: Essencial (quinzenal), Família (semanal) e Ultra-conveniência (alta frequência, frutas picadas), criando margem premium.",
+      },
+    ],
+    gallery: [
+      {
+        src: media.hero.benedictRedgrove.observatoryWhite,
+        alt: "Imagem de suporte editorial",
+        caption: "Discovery estratégico para uma foodtech em estágio inicial.",
+      },
+      {
+        src: media.hero.benedictRedgrove.architectureWhite,
+        alt: "Imagem de suporte editorial",
+        caption: "Benchmarking e análise competitiva do setor.",
+      },
+      {
+        src: media.hero.benedictRedgrove.motorbikeBeige,
+        alt: "Imagem de suporte editorial",
+        caption: "Arquitetura de produto redesenhada.",
+      },
+    ],
+    logos: [
+      { src: media.brands.acehub,      alt: "Logo azul minimalista",     label: "Marca azul" },
+      { src: media.brands.vulpistudio, alt: "Logo geométrico escuro",    label: "Marca escura" },
+      { src: media.brands.dbcCompany,  alt: "Logo BC",                   label: "BC" },
+    ],
+  },
+  {
     slug: "website-builder-macle",
     title: "Macle websitebuilder",
     category: "Produto",
@@ -331,6 +387,7 @@ export const cases: PortfolioCase[] = [
 ];
 
 const caseDisplayOrder = [
+  "assinaturas-de-frutas-frescas",
   "portal-validador-de-documentos",
   "portal-analise-de-documentos-por-ai",
   "macle-sistema-erp",

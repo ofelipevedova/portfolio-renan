@@ -204,7 +204,7 @@ export function EvitarConstruirProdutoErradoCasePage() {
 
             <Reveal>
               <div className="flex flex-col gap-6 border-t border-black/10 pt-6 md:flex-row md:items-end md:justify-between">
-                <p className="font-display text-[clamp(2.2rem,5.5vw,4.8rem)] leading-[0.94] tracking-[-0.08em] text-ink">
+                <p className="font-display text-[clamp(1.8rem,4vw,3.8rem)] leading-[1.02] tracking-[-0.08em] text-ink">
                   {page.decision.headline}
                 </p>
                 <p className="max-w-[38ch] shrink-0 text-[14px] leading-[1.72] text-ink/55 md:text-[15px]">
