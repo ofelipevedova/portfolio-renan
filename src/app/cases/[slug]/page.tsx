@@ -2,14 +2,12 @@ import type { Metadata } from "next";
 import type { ReactElement } from "react";
 import { notFound } from "next/navigation";
 
-import { AssinaturasFrutasFrescasCasePage } from "@/components/case-pages/AssinaturasFrutasFrescasCasePage";
 import { GenericCasePage } from "@/components/case-pages/GenericCasePage";
 import { MacleErpCasePage } from "@/components/case-pages/MacleErpCasePage";
 import { PortalAnaliseDocumentosCasePage } from "@/components/case-pages/PortalAnaliseDocumentosCasePage";
 import { PortalValidadorDocumentosCasePage } from "@/components/case-pages/PortalValidadorDocumentosCasePage";
 import { WebsiteBuilderMacleCasePage } from "@/components/case-pages/WebsiteBuilderMacleCasePage";
 import { cases } from "@/data/cases";
-import { assinaturasFrutasFrescasCasePage } from "@/data/case-pages/assinaturas-frutas-frescas";
 import { portalAnaliseDocumentosCasePage } from "@/data/case-pages/portal-analise-documentos-por-ai";
 import { portalValidadorDocumentosCasePage } from "@/data/case-pages/portal-validador-de-documentos";
 import { macleErpCasePage } from "@/data/case-pages/macle-erp";
@@ -21,7 +19,6 @@ const caseSlugAliases = {
 } as const;
 
 const detailedCasePages = [
-  assinaturasFrutasFrescasCasePage,
   macleErpCasePage,
   portalAnaliseDocumentosCasePage,
   portalValidadorDocumentosCasePage,
@@ -33,7 +30,6 @@ const detailedCasePageBySlug = new Map(
 );
 
 const detailedCasePageRenderers = new Map<string, () => ReactElement>([
-  [assinaturasFrutasFrescasCasePage.slug, () => <AssinaturasFrutasFrescasCasePage />],
   [macleErpCasePage.slug, () => <MacleErpCasePage />],
   [portalAnaliseDocumentosCasePage.slug, () => <PortalAnaliseDocumentosCasePage />],
   [portalValidadorDocumentosCasePage.slug, () => <PortalValidadorDocumentosCasePage />],

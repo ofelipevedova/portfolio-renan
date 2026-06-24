@@ -43,7 +43,7 @@ export type PortfolioCase = {
   logos: LogoItem[];
 };
 
-export const cases: PortfolioCase[] = [
+const casesData: PortfolioCase[] = [
   {
     slug: "assinaturas-de-frutas-frescas",
     title: "Assinaturas de frutas frescas",
@@ -386,8 +386,11 @@ export const cases: PortfolioCase[] = [
   },
 ];
 
+export const cases = casesData.filter(
+  (item) => item.slug !== "assinaturas-de-frutas-frescas",
+);
+
 const caseDisplayOrder = [
-  "assinaturas-de-frutas-frescas",
   "portal-validador-de-documentos",
   "portal-analise-de-documentos-por-ai",
   "macle-sistema-erp",
