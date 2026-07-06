@@ -87,7 +87,7 @@ export const media = {
     ghBrantech: "/assets/brands/gh-brantech.png",
   },
   people: {
-    renanPortrait: "/assets/people/renan/portrait.jpg",
+    renanPortrait: "/assets/people/renan/felipe.png",
   },
   curriculum: {
     pdf: "/files/curriculo/renan-f-vedvova-currículo.pdf",
